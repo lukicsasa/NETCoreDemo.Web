@@ -1,5 +1,6 @@
-import { User } from "../../../shared/models/user";
 import { Subject } from "./subject";
+import { User } from "./user";
+
 
 export class Exam {
     Date: Date;

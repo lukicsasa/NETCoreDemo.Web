@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Created By</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let subject of subjects">
+      <td>{{subject.id}}</td>
+      <td>{{subject.name}}</td>
+      <td>{{subject.createdBy.name}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Subject</th>
+      <th>Grade</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let exam of exams">
+      <td>{{exam.user.name}}</td>
+      <td>{{exam.subject.name}}</td>
+      <td>{{exam.grade}}</td>
+      <td>{{exam.date | dateOnly}}}</td>
+    </tr>
+  </tbody>
+  </table>

@@ -19,6 +19,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { SessionService } from './shared/services/session.service';
 import { LoginService } from './components/login/login.service';
 import { HomeService } from './components/home/home.service';
+import { SubjectService } from './shared/services/subject.service';
+import { ExamsComponent } from './components/exams/exams.component';
+import { ExamService } from './shared/services/exam.service';
+import { NgSelectModule} from '@ng-select/ng-select';
+import { DateOnlyPipe } from './shared/pipes/date-only.pipe';
 
 @NgModule({
   declarations: [
@@ -27,16 +32,19 @@ import { HomeService } from './components/home/home.service';
     LoginComponent,
     AlertComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    ExamsComponent,
+    DateOnlyPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgSelectModule,
     NgbModule.forRoot()
   ],
-  providers: [AuthGuard, AlertService, RequestService, HomeService, RegisterService, SessionService, LoginService],
+  providers: [AuthGuard, AlertService,SubjectService,ExamService, RequestService, HomeService, RegisterService, SessionService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

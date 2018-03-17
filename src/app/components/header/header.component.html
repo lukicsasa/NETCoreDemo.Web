@@ -9,14 +9,12 @@
       <li class="nav-item">
         <a class="nav-link" href="#" [routerLink]="['']">Home</a>
       </li>
-      <div *ngIf="sessionService.user.role.name === 'Professor'">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Add Subject </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Add Exam</a>
-        </li>
-      </div>
+      <li *ngIf="sessionService.user.role.name === 'Professor'" class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/subjects']">Subjects</a>
+      </li>
+      <li *ngIf="sessionService.user.role.name === 'Professor'" class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['exams']">Exams</a>
+      </li>
     </ul>
     <form class="form-inline mt-2 mt-md-0">
       <button class="btn btn-outline-success my-2 my-sm-0" (click)="logout()" type="submit">Logout</button>

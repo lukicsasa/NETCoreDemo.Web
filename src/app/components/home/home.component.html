@@ -1,28 +1,52 @@
 <div class="card">
-    <div class="card-body">
-      Name: <span>{{sessionService.user.name}}</span> <br/>
-      Username: <span>{{sessionService.user.username}} </span><br/>
-      Role: <span>{{sessionService.user.role.name}} </span><br/>
-    </div>
+  <div class="card-body">
+    Name:
+    <span>{{sessionService.user.name}}</span>
+    <br/> Username:
+    <span>{{sessionService.user.username}} </span>
+    <br/> Role:
+    <span>{{sessionService.user.role.name}} </span>
+    <br/>
   </div>
-  <div class="card" *ngIf="sessionService.user.role.name === 'Student'">
-      <div class="card-body">
-        <span>Subjects</span> <br/>
-        <table class="table">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Grade</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let exam of exams">
-            <td>{{exam.subject.name}}</td>
-            <td>{{exam.grade}}</td>
-            <td>{{exam.subject.date}}</td>
-          </tr>
-        </tbody>
-        </table>
-      </div>
+</div>
+<div class="card" *ngIf="sessionService.user.role.name === 'Student'">
+  <div class="card-body">
+    <span>Subjects</span>
+    <br/>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Grade</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exam of results">
+          <td>{{exam.subject.name}}</td>
+          <td>{{exam.grade}}</td>
+          <td>{{exam.date | dateOnly}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card" *ngIf="sessionService.user.role.name === 'Professor'">
+  <div class="card-body">
+    <span>Add Exam</span>
+    <br/>
+    <div class="form-group">
+      <label for="student">Student</label>
+      <ng-select [items]="students" bindLabel="name" bindValue="id" placeholder="Select student" [(ngModel)]="exam.userId"></ng-select>
     </div>
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <ng-select [items]="subjects" bindLabel="name" bindValue="id" placeholder="Select subject" [(ngModel)]="exam.subjectId"></ng-select>
+    </div>
+    <div class="form-group">
+      <label for="grade">Grade</label>
+      <input type="number" class="form-control" id="grade" placeholder="grade" [(ngModel)]="exam.grade">
+    </div>
+    <button class="btn btn-success" (click)="addExam()">Add</button>
+  </div>
+</div>

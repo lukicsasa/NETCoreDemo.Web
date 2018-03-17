@@ -1,28 +1,25 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {environment} from '../../../environments/environment';
-import {Router} from '@angular/router';
-import {AlertService} from '../../components/alert/alert.service';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs/Rx'
+import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
+import { AlertService } from '../../components/alert/alert.service';
 import { SessionService } from './session.service';
 
 @Injectable()
 export class RequestService {
-  private headers = {'Content-Type': 'application/json', 'Authorization' : null};
 
   constructor(private http: HttpClient, private router: Router, private alertService: AlertService, private sessionService: SessionService) {
   }
 
   post(uri: any, params: Object = {}): Observable<any> {
-    this.headers.Authorization = this.sessionService.accessToken; 
     uri = typeof uri === 'object' ? uri.join('/') : uri;
-    return this.http.post(environment.baseUri + uri, JSON.stringify(params), {headers: this.headers});
+    return this.http.post(environment.baseUri + uri, JSON.stringify(params), { headers: this.setHeaders() });
   }
 
   get(uri: any, params: Object = {}): Observable<any> {
-    this.headers.Authorization = this.sessionService.accessToken; 
     uri = typeof uri === 'object' ? uri.join('/') : uri;
-    return this.http.get(environment.baseUri + uri, {headers: this.headers, params: this.createParams(params)});
+    return this.http.get(environment.baseUri + uri, { headers: this.setHeaders(), params: this.createParams(params) });
   }
 
   handleError = (error: any) => {
@@ -43,7 +40,6 @@ export class RequestService {
           this.alertService.showError(message);
         }
     }
-
     return Observable.throw(message);
   }
 
@@ -53,11 +49,19 @@ export class RequestService {
     }
   }
 
-  private createParams = (obj: any) : HttpParams => {
+  private createParams = (obj: any): HttpParams => {
     let params: HttpParams;
-    for(var field in obj) {
+    for (var field in obj) {
       params = params.set(field, obj[field]);
     }
     return params;
+  }
+
+  private setHeaders = () : HttpHeaders => {
+    let headers = new HttpHeaders();
+    if (this.sessionService.accessToken)
+      headers = headers.set('Authorization', this.sessionService.accessToken);
+    headers = headers.set('Content-Type', 'application/json');
+    return headers;
   }
 }
