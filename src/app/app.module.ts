@@ -13,13 +13,20 @@ import {AlertService} from './components/alert/alert.service';
 import {RegisterService} from './components/register/register.service';
 import {RequestService} from './shared/services/request.service';
 import {HttpClientModule} from '@angular/common/http';
+import { AuthGuard } from './guards/auth.guard';
+import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SessionService } from './shared/services/session.service';
+import { LoginService } from './components/login/login.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    AlertComponent
+    AlertComponent,
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +35,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     NgbModule.forRoot()
   ],
-  providers: [ AlertService, RequestService, RegisterService],
+  providers: [AuthGuard, AlertService, RequestService, RegisterService, SessionService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

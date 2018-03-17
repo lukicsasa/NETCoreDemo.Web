@@ -28,7 +28,7 @@ export class RequestService {
         this.router.navigate(['login']);
         break;
       case 400:
-        this.handleValidation(error);
+        this.handleValidation(error.error);
         break;
       default:
         message = error._body ? JSON.parse(error._body).message : error.message;
