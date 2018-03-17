@@ -18,6 +18,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SessionService } from './shared/services/session.service';
 import { LoginService } from './components/login/login.service';
+import { HomeService } from './components/home/home.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { LoginService } from './components/login/login.service';
     HttpClientModule,
     NgbModule.forRoot()
   ],
-  providers: [AuthGuard, AlertService, RequestService, RegisterService, SessionService, LoginService],
+  providers: [AuthGuard, AlertService, RequestService, HomeService, RegisterService, SessionService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

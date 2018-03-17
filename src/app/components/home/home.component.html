@@ -1,3 +1,28 @@
-<p>
-  home works!
-</p>
+<div class="card">
+    <div class="card-body">
+      Name: <span>{{sessionService.user.name}}</span> <br/>
+      Username: <span>{{sessionService.user.username}} </span><br/>
+      Role: <span>{{sessionService.user.role.name}} </span><br/>
+    </div>
+  </div>
+  <div class="card" *ngIf="sessionService.user.role.name === 'Student'">
+      <div class="card-body">
+        <span>Subjects</span> <br/>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Grade</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exam of exams">
+            <td>{{exam.subject.name}}</td>
+            <td>{{exam.grade}}</td>
+            <td>{{exam.subject.date}}</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
